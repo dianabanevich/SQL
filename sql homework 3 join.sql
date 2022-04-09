@@ -32,6 +32,8 @@ select employee_name, monthly_salary from employees inner join employee_salary
 		inner join salary on salary.id = employee_salary.salary_id
 		where monthly_salary is null;
 	
+--(не работает, потому что походу всем начислена зарплата)--
+	
  --6. Вывести всех работников с названиями их должности.--
 	
 select employee_name, role_name from employees inner join roles_employee 
@@ -43,7 +45,7 @@ select employee_name, role_name from employees inner join roles_employee
 select employee_name, role_name from employees inner join roles_employee 
 		on employees.id = roles_employee.employee_id
 		inner join roles on roles.id = roles_employee.role_id
-		where role_name like '%Java%';
+		where role_name like '%Java %';
 
  --8. Вывести имена и должность только Python разработчиков.--
  
@@ -81,6 +83,8 @@ select employee_name, role_name, monthly_salary from employees inner join roles_
 		inner join employee_salary on employee_salary.salary_id = roles_employee.employee_id 
 		inner join salary on salary.id = employee_salary.salary_id 
 		where role_name like '%Junior%';
+	
+--(почему то не выводит джунов QA)--
 
  --13. Вывести имена и зарплаты Middle специалистов--
 	
@@ -89,7 +93,7 @@ select employee_name, role_name, monthly_salary from employees inner join roles_
 		inner join roles on roles.id = roles_employee.role_id
 		inner join employee_salary on employee_salary.salary_id = roles_employee.employee_id 
 		inner join salary on salary.id = employee_salary.salary_id  
-		where role_name like '%Middle%';
+		where role_name like '%Middle %';
 	
  --14. Вывести имена и зарплаты Senior специалистов--
 	
@@ -98,7 +102,9 @@ select employee_name, role_name, monthly_salary from employees inner join roles_
 		inner join roles on roles.id = roles_employee.role_id
 		inner join employee_salary on employee_salary.salary_id = roles_employee.employee_id 
 		inner join salary on salary.id = employee_salary.salary_id 
-		where role_name like '%Senior%';
+		where role_name like '%Senior %';
+	
+--(тоже не выводит сеньоров QA)--
 	
  --15. Вывести зарплаты Java разработчиков--
 	
@@ -107,7 +113,7 @@ select employee_name, role_name, monthly_salary from employees inner join roles_
 		inner join roles on roles.id = roles_employee.role_id
 		inner join employee_salary on employee_salary.salary_id = roles_employee.employee_id 
 		inner join salary on salary.id = employee_salary.salary_id 
-		where role_name like '%Java%';
+		where role_name like '%Java %';
 	
  --16. Вывести зарплаты Python разработчиков--
 	
@@ -134,7 +140,9 @@ select employee_name, role_name, monthly_salary from employees inner join roles_
 		inner join roles on roles.id = roles_employee.role_id
 		inner join employee_salary on employee_salary.salary_id = roles_employee.employee_id 
 		inner join salary on salary.id = employee_salary.salary_id 
-		where role_name like '%Middle JavaScript%';	
+		where role_name like '%Middle Javascript%';	
+	
+--(та же фигня, в базе есть джаваскрипт, но тут не выводит)--
 	
  --19. Вывести имена и зарплаты Senior Java разработчиков--
 	
@@ -143,7 +151,7 @@ select employee_name, role_name, monthly_salary from employees inner join roles_
 		inner join roles on roles.id = roles_employee.role_id
 		inner join employee_salary on employee_salary.salary_id = roles_employee.employee_id 
 		inner join salary on salary.id = employee_salary.salary_id 
-		where role_name like '%Senior JavaScript%';		
+		where role_name like '%Senior Java %';		
 	
 -- 20. Вывести зарплаты Junior QA инженеров--
 	
@@ -152,7 +160,9 @@ select role_name, monthly_salary from employees inner join roles_employee
 		inner join roles on roles.id = roles_employee.role_id
 		inner join employee_salary on employee_salary.salary_id = roles_employee.employee_id 
 		inner join salary on salary.id = employee_salary.salary_id
-		where role_name like '%Junior%QA%';
+		where role_name like '%Junior QA %';
+
+--(аналогично, не выводит)--
 	
  --21. Вывести среднюю зарплату всех Junior специалистов--
 	
@@ -198,6 +208,8 @@ select count(distinct role_name) from employees inner join roles_employee
 		inner join employee_salary on employee_salary.salary_id = roles_employee.employee_id 
 		inner join salary on salary.id = employee_salary.salary_id
 		where role_name like '%QA engineer%';
+	
+--(выводит только одного, но по факту больше)--
 	
  --26. Вывести количество Middle специалистов.--
 	
@@ -263,5 +275,5 @@ select employee_name, role_name, monthly_salary from employees inner join roles_
 		inner join employee_salary on employee_salary.salary_id = roles_employee.employee_id 
 		inner join salary on salary.id = employee_salary.salary_id
 		where monthly_salary = 1100 or monthly_salary = 1500 or monthly_salary = 2000
-		order by employee_name;
+		order by monthly_salary;
  
